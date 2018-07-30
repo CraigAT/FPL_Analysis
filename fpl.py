@@ -2,20 +2,21 @@
 """
 Fantasy Premier League - Statical Analysis
 ---
-Use the FPL API to do some data analysis
+Use the FPL API to gather some data from the FPL site and do some data analysis
 
 """
 
-import requests
-from random import choice, random
-
-
 __author__      = "Craig Thomas"
 __copyright__   = "Copyright 2018, Craig Thomas"
-__credits__     = ["Craig Thomas", "Python"]
-__license__     = "GPL"
-__version__     = "1.0.1"
-__maintainer__  = "Craig Thomas"
-__email__       = "craig.at@gmail.com"
-__status__      = "Development"
+__version__     = "0.1"
+
+
+import urllib.request, json
+
+if __name__ == '__main__':      #code to execute if called from command-line
+
+    with urllib.request.urlopen("https://fantasy.premierleague.com/drf/bootstrap-static") as url:
+        data = json.loads(url.read().decode())
+        for players in data["elements"]:
+            print(players["web_name"])
 
